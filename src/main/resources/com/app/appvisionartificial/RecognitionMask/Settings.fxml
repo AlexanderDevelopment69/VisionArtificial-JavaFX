@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"   fx:controller="com.app.appvisionartificial.RecognitionMask.SettingsController">
+   <children>
+      <Pane prefHeight="620.0" prefWidth="300.0" style="-fx-background-color: #1E2326;">
+         <children>
+            <Label layoutX="30.0" layoutY="78.0" prefHeight="17.0" prefWidth="236.0" style="-fx-text-fill: #767E8C;" text="Completar todos los campos." />
+            <Label layoutX="30.0" layoutY="61.0" style="-fx-text-fill: #767E8C;" text="Configura activando o desactivando los botones" />
+            <Label layoutX="30.0" layoutY="31.0" style="-fx-text-fill: white; -fx-font-size: 15;" text="Configuracion" />
+            <MFXToggleButton fx:id="toogleButton" contentDisplay="RIGHT" layoutX="33.0" layoutY="125.0" onMouseClicked="#activeCamara" prefHeight="58.0" prefWidth="180.0" style="-fx-text-fill: white;" text="Activar camara">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </MFXToggleButton>
+         </children>
+      </Pane>
+   </children>
+</StackPane>
