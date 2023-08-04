@@ -2,49 +2,24 @@ package com.app.appvisionartificial.RecognitionMask;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
-import com.jfoenix.controls.JFXToggleButton;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.imgcodecs.Imgcodecs;
 
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class RecognitionMaskController implements Initializable {
     @FXML
@@ -59,7 +34,11 @@ public class RecognitionMaskController implements Initializable {
     @FXML
     public ImageView imageView;
     @FXML
-    public Label text;
+    private Label detectionMessage;
+
+    @FXML
+    private Label securityStatus;
+
 
     @FXML
     private StackPane MenuDrawerADD;
@@ -72,15 +51,8 @@ public class RecognitionMaskController implements Initializable {
     private CameraConnection cameraConnection;
 
 
-    private Task<Boolean> connectTask;
 
 
-    private FaceRecognitionModel faceRecognitionModel;
-
-    public RecognitionMaskController() {
-        String cascadeFilePath = "ruta_al_archivo_cascade.xml"; // Ruta al archivo XML del modelo Haar Cascade
-        faceRecognitionModel = new FaceRecognitionModel(cascadeFilePath);
-    }
 
 
 
@@ -91,13 +63,7 @@ public class RecognitionMaskController implements Initializable {
         Platform.exit();
     }
 
-    public void setLabel(String labelText) {
-        text.setText(labelText);
-    }
 
-    public Label getLabel() {
-        return text;
-    }
 
 
     @FXML
@@ -204,7 +170,7 @@ public class RecognitionMaskController implements Initializable {
                     imageView.setVisible(true);
                     if (connectTask.getValue()) {
                         // Si la conexión es exitosa, iniciar el streaming de la cámara
-                        cameraConnection.startCameraStream(imageView);
+                        cameraConnection.startCameraStream(imageView,detectionMessage);
 
                     } else {
                         // Si la conexión falla, deseleccionar el ToggleButton
@@ -227,7 +193,9 @@ public class RecognitionMaskController implements Initializable {
 
             }
 
-        } else {
+        }
+
+        else {
             // Detener el streaming
             cameraConnection.stopCameraStream();
             // Habilitar nuevamente el ToggleButton
@@ -238,13 +206,23 @@ public class RecognitionMaskController implements Initializable {
             imageView.setVisible(false);
 
 
+
         }
+
+
+
+
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        cameraConnection = new CameraConnection();
+        String xmlModelPath = "src/main/java/com/app/appvisionartificial/Model/haarcascade_frontalface_default.xml";
+        cameraConnection = new CameraConnection(xmlModelPath);
+
+//        cameraConnection = new CameraConnection();
+
+
         // Vincular el tamaño de la imagen al tamaño del AnchorPane
         imageView.fitWidthProperty().bind(anchorPane.widthProperty());
         imageView.fitHeightProperty().bind(anchorPane.heightProperty());
@@ -268,7 +246,27 @@ public class RecognitionMaskController implements Initializable {
         });
 
 
+
+        // Agregar un listener al texto del sourceLabel para actualizar el updatingLabel
+        detectionMessage.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Verificar si el nuevo valor del sourceLabel es "1"
+            if ("Rostro detectado".equals(newValue)) {
+                securityStatus.setText("Seguro");
+                securityStatus.setStyle("-fx-text-fill: #41A170 ; -fx-font-size:23;");
+            }
+            if ("Ningún rostro detectado".equals(newValue)) {
+                securityStatus.setText("Inseguro");
+                securityStatus.setStyle("-fx-text-fill:#E43D4B ; -fx-font-size:23;");
+            }
+
+
+        });
+
+
+
     }
+
+
 
 
 }
