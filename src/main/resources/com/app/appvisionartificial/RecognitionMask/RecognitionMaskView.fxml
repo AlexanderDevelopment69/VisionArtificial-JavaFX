@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -13,42 +14,42 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.appvisionartificial.RecognitionMask.RecognitionMaskController">
    <children>
       <AnchorPane prefHeight="40.0" prefWidth="950.0" style="-fx-background-color: #1E2326;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox layoutX="684.0" prefHeight="40.0" prefWidth="116.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox layoutX="683.0" prefHeight="40.0" prefWidth="116.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <JFXButton fx:id="btnMinimize" layoutX="60.0" layoutY="10.0" onAction="#minimize" prefHeight="40.0" prefWidth="50.0" style="-fx-text-fill: white; -fx-font-size: 27;" text="-">
+                  <MFXButton fx:id="btnMinimize" onAction="#minimize" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0; -fx-text-fill: white; -fx-font-size: 20; -fx-background-color: transparent;" text="-">
                      <padding>
                         <Insets bottom="-5.0" top="-5.0" />
                      </padding>
-                  </JFXButton>
-                  <JFXButton fx:id="btnMaximize" onAction="#maximize" prefHeight="40.0" prefWidth="50.0" style="-fx-text-fill: white; -fx-font-size: 30;" text="▭">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
+                  </MFXButton>
+                  <MFXButton fx:id="btnMaximize" onAction="#maximize" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0; -fx-text-fill: white; -fx-font-size: 30; -fx-background-color: transparent;" text="▭">
                      <padding>
                         <Insets bottom="-10.0" top="-10.0" />
                      </padding>
-                  </JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="10.0" onAction="#exit" prefHeight="40.0" prefWidth="50.0" style="-fx-text-fill: white; -fx-font-size: 20;" text="x">
+                  </MFXButton>
+                  <MFXButton onAction="#exit" prefHeight="40.0" prefWidth="50.0" style="-fx-background-radius: 0; -fx-text-fill: white; -fx-font-size: 20; -fx-background-color: transparent;" text="x">
                      <padding>
-                        <Insets bottom="-5.0" top="-10.0" />
+                        <Insets top="-5.0" />
                      </padding>
-                  </JFXButton>
+                  </MFXButton>
                </children>
             </HBox>
+            <Label layoutX="38.0" layoutY="11.0" style="-fx-text-fill: white;" text="DeteccionApp">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPane" layoutY="71.0" prefHeight="580.0" prefWidth="950.0" style="-fx-background-color: #1E2326; -fx-border-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+      <AnchorPane fx:id="anchorPane" layoutY="40.0" prefHeight="580.0" prefWidth="950.0" style="-fx-background-color: #1E2326; -fx-border-color: transparent;" AnchorPane.bottomAnchor="132.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <children>
-            <ImageView fx:id="currenFrame" fitHeight="390.0" fitWidth="950.0" layoutY="56.0" pickOnBounds="true" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <image>
-                  <Image url="@../Images/gris.jpg" />
-               </image></ImageView>
-            <JFXButton alignment="CENTER" layoutX="910.0" onAction="#showSettings" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 50;" text=" " AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fx:id="imageView" layoutY="56.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <JFXButton fx:id="buttonSetting" alignment="CENTER" layoutX="910.0" onAction="#showSettings" prefHeight="30.0" prefWidth="30.0" style="-fx-background-radius: 50;" text=" " AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <ripplerFill>
                   <LinearGradient endX="1.0" endY="1.0">
                      <stops>
@@ -68,40 +69,36 @@
                   <Insets right="-7.0" />
                </padding>
             </JFXButton>
-            <AnchorPane layoutY="449.0" prefHeight="132.0" prefWidth="950.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         </children></AnchorPane>
+      <AnchorPane prefHeight="132.0" prefWidth="950.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <JFXButton layoutX="30.0" layoutY="43.0" prefHeight="46.0" prefWidth="122.0" style="-fx-background-color: #416FFF; -fx-background-radius: 40; -fx-text-fill: white;" text="Alertar" AnchorPane.bottomAnchor="42.599999999999994" />
+            <AnchorPane layoutX="223.0" prefHeight="132.0" prefWidth="250.0" style="-fx-background-color: white;">
                <children>
-                  <JFXButton layoutX="30.0" layoutY="43.0" prefHeight="46.0" prefWidth="122.0" style="-fx-background-color: #416FFF; -fx-background-radius: 40; -fx-text-fill: white;" text="Alertar" AnchorPane.bottomAnchor="42.599999999999994" />
-                  <AnchorPane layoutX="223.0" prefHeight="132.0" prefWidth="250.0" style="-fx-background-color: white;">
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="41.0" style="-fx-text-fill: black;" text="Identificacion" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="92.19999999999999" />
-                        <Label fx:id="text" alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="58.0" prefHeight="34.0" prefWidth="113.0" style="-fx-font-size: 23; -fx-text-fill: black;" text="Mascarilla" AnchorPane.leftAnchor="66.0" AnchorPane.rightAnchor="71.0" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="132.0" prefWidth="250.0" style="-fx-background-color: #1E2326;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="520.0" AnchorPane.rightAnchor="179.6">
-                     <children>
-                        <Label alignment="CENTER" layoutX="86.0" layoutY="58.0" prefHeight="34.0" prefWidth="78.0" style="-fx-font-size: 23; -fx-text-fill: #41A170;" text="Seguro" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="68.60000000000001" />
-                        <Label alignment="CENTER" layoutX="69.0" layoutY="33.0" prefHeight="18.0" prefWidth="116.0" style="-fx-text-fill: white;" text="Nivel de peligrosidad" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="63.0" />
-                     </children>
-                  </AnchorPane>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="69.0" layoutY="41.0" style="-fx-text-fill: black;" text="Identificacion" AnchorPane.leftAnchor="87.0" AnchorPane.rightAnchor="92.19999999999999" />
+                  <Label fx:id="text" alignment="CENTER" contentDisplay="CENTER" layoutX="66.0" layoutY="58.0" prefHeight="34.0" prefWidth="113.0" style="-fx-font-size: 23; -fx-text-fill: black;" text="Mascarilla" AnchorPane.leftAnchor="66.0" AnchorPane.rightAnchor="71.0" />
                </children>
             </AnchorPane>
-         </children></AnchorPane>
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" direction="RIGHT" layoutX="950.0" layoutY="80.0" overLayVisible="false" prefWidth="0.0" resizeContent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-      <StackPane fx:id="MenuDrawerADD" layoutX="977.0">
+            <AnchorPane prefHeight="132.0" prefWidth="250.0" style="-fx-background-color: #1E2326;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="520.0" AnchorPane.rightAnchor="179.6">
+               <children>
+                  <Label alignment="CENTER" layoutX="86.0" layoutY="58.0" prefHeight="34.0" prefWidth="78.0" style="-fx-font-size: 23; -fx-text-fill: #41A170;" text="Seguro" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="68.60000000000001" />
+                  <Label alignment="CENTER" layoutX="69.0" layoutY="33.0" prefHeight="18.0" prefWidth="116.0" style="-fx-text-fill: white;" text="Nivel de peligrosidad" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="63.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <StackPane fx:id="MenuDrawerADD" layoutX="977.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="-327.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane prefHeight="620.0" prefWidth="300.0" style="-fx-background-color: #1E2326;">
                <children>
                   <Label layoutX="30.0" layoutY="78.0" prefHeight="17.0" prefWidth="236.0" style="-fx-text-fill: #767E8C;" text="Completar todos los campos." />
                   <Label layoutX="30.0" layoutY="61.0" style="-fx-text-fill: #767E8C;" text="Configura activando o desactivando los botones" />
                   <Label layoutX="30.0" layoutY="31.0" style="-fx-text-fill: white; -fx-font-size: 15;" text="Configuracion" />
-                  <MFXToggleButton fx:id="toogleButton" contentDisplay="RIGHT" layoutX="33.0" layoutY="125.0" onMouseClicked="#activeCamara" prefHeight="58.0" prefWidth="180.0" style="-fx-text-fill: white;" text="Activar camara">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </MFXToggleButton>
+                  <MFXToggleButton fx:id="toggleButton" layoutX="33.0" layoutY="125.0" onMouseClicked="#toggleCamera" prefHeight="42.0" prefWidth="116.0" style="-fx-text-fill: white;" text="Activar camara" />
                </children>
             </Pane>
          </children>
       </StackPane>
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="300.0" direction="RIGHT" layoutX="950.0" layoutY="80.0" overLayVisible="false" prefWidth="0.0" resizeContent="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
    </children>
 </AnchorPane>
