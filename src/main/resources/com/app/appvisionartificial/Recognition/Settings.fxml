@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane fx:id="MenuDrawerADD" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.appvisionartificial.RecognitionMask.SettingsController">
+<StackPane fx:id="MenuDrawerADD" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.appvisionartificial.Recognition.SettingsController">
    <children>
       <Pane prefHeight="620.0" prefWidth="300.0" style="-fx-background-color: #1E2326;">
          <children>

@@ -1,12 +1,10 @@
-package com.app.appvisionartificial.RecognitionMask;
+package com.app.appvisionartificial.Recognition;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +31,8 @@ public class RecognitionMaskController implements Initializable {
     private JFXDrawer drawer;
     @FXML
     public ImageView imageView;
+
+
     @FXML
     private Label detectionMessage;
 
@@ -52,18 +52,11 @@ public class RecognitionMaskController implements Initializable {
 
 
 
-
-
-
-
-
     @FXML
     void exit(ActionEvent event) {
         cameraConnection.stopCameraStream();
         Platform.exit();
     }
-
-
 
 
     @FXML
@@ -162,7 +155,6 @@ public class RecognitionMaskController implements Initializable {
                         return cameraConnection.connect(0);
 //                        String cameraURL = "http://192.168.88.15:4747/video"; // Cambiar por la URL de la cámara de red WiFi
 //                        return cameraConnection.connectToWifiCamera(cameraURL);
-
                     }
                 };
 
@@ -170,8 +162,8 @@ public class RecognitionMaskController implements Initializable {
                     imageView.setVisible(true);
                     if (connectTask.getValue()) {
                         // Si la conexión es exitosa, iniciar el streaming de la cámara
-                        cameraConnection.startCameraStream(imageView,detectionMessage);
-
+                        cameraConnection.startCameraStream(imageView, detectionMessage);
+//                        cameraConnection.startProcessing(imageView,detectionMessage);
                     } else {
                         // Si la conexión falla, deseleccionar el ToggleButton
                         toggleButton.setSelected(false);
@@ -193,11 +185,10 @@ public class RecognitionMaskController implements Initializable {
 
             }
 
-        }
-
-        else {
+        } else {
             // Detener el streaming
             cameraConnection.stopCameraStream();
+//            cameraConnection.stopCameraProcessing();
             // Habilitar nuevamente el ToggleButton
             toggleButton.setDisable(false);
 
@@ -206,10 +197,7 @@ public class RecognitionMaskController implements Initializable {
             imageView.setVisible(false);
 
 
-
         }
-
-
 
 
     }
@@ -246,7 +234,6 @@ public class RecognitionMaskController implements Initializable {
         });
 
 
-
         // Agregar un listener al texto del sourceLabel para actualizar el updatingLabel
         detectionMessage.textProperty().addListener((observable, oldValue, newValue) -> {
             // Verificar si el nuevo valor del sourceLabel es "1"
@@ -259,8 +246,8 @@ public class RecognitionMaskController implements Initializable {
                 securityStatus.setStyle("-fx-text-fill:#E43D4B ; -fx-font-size:23;");
             }
 
-
         });
+
 
 
 

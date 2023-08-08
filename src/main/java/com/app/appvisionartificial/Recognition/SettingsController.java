@@ -1,4 +1,4 @@
-package com.app.appvisionartificial.RecognitionMask;
+package com.app.appvisionartificial.Recognition;
 
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.fxml.FXML;
